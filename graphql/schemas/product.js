@@ -2,8 +2,9 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
     scalar Date
+    scalar Object
 
-    type Product {
+    type Products {
         id: Int!
         name: String!
         companyName: String!
@@ -18,6 +19,28 @@ module.exports = gql`
         keyWords: [String!]!
     }
 
+    type productCategory {
+        id: Int!
+        name: String!
+    }
+    
+    type Product {
+        id: Int!
+        name: String!
+        companyName: String!
+        email: String!
+        contactPerson: String!
+        contact: String!
+        description: String!
+        logo: String
+        companyUrl: String!
+        status: String!
+        publishedAt: Date!
+        keyWords: [Object!]!
+        features: [Object!]!
+        category: productCategory!
+    }
+
     extend type Mutation {
         addProduct(input: ProductInput!): ProductResponse!
         updateProduct(input: UpdateProductInput!): ProductResponse!
@@ -25,7 +48,8 @@ module.exports = gql`
     }
 
     extend type Query {
-        products(limit: Int!): [Product!]!
+        products(limit: Int!): [Products!]!
+        product(productId: Int!): Product!
     }
 
     type ProductResponse {
@@ -41,8 +65,8 @@ module.exports = gql`
         status: String!
         publishedAt: Date
         keyWords: [String!]!
-        features: [String!]!
-        attachments: [String!]!
+        features: [Object!]!
+        # attachments: [String!]!
         categoryId: Int!
     }
 
@@ -61,8 +85,8 @@ module.exports = gql`
         categoryId: Int!
         companyUrl: String!
         keyWords: [String!]!
-        features: [String!]!
-        attachments: [String!]!
+        features: [Object!]!
+        # attachments: [String!]!
     }
     
     input UpdateProductInput {
@@ -77,8 +101,8 @@ module.exports = gql`
         categoryId: Int!
         companyUrl: String!
         keyWords: [String!]!
-        features: [String!]!
-        attachments: [String!]!
+        features: [Object!]!
+        # attachments: [String!]!
     }
 
     input PublishProductInput {

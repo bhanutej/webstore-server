@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ProductFeature.init({
-    name: DataTypes.STRING
+    label: DataTypes.STRING,
+    name: DataTypes.STRING,
+    attachmentUrl: DataTypes.STRING,
+    attachmentPath: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'ProductFeature',

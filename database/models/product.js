@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.hasMany(models.ProductKeyWord, { foreignKey: 'productId' });
       this.hasMany(models.ProductFeature, { foreignKey: 'productId' });
-      this.hasMany(models.ProductAttachment, { foreignKey: 'productId' });
       this.belongsTo(models.User, { foreignKey: 'userId' })
       this.belongsTo(models.Category, { foreignKey: 'categoryId' })
     }

@@ -9,7 +9,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      label: {
+        type: Sequelize.STRING
+      },
       name: {
+        type: Sequelize.STRING
+      },
+      attachmentUrl: {
+        type: Sequelize.STRING
+      },
+      attachmentPath: {
         type: Sequelize.STRING
       },
       productId: {

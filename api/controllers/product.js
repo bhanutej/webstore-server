@@ -25,7 +25,8 @@ exports.updateAttachment = (req, res, next) => {
     name: req.file.fileName,
     status: 'done',
     url: `http://localhost:3300/${req.file.path}`,
-    path: req.file.path
+    path: req.file.path,
+    reqFile: req.file
   }
   return res
     .status(201)
