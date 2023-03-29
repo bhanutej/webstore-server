@@ -2,10 +2,10 @@ require('dotenv').config();
 
 module.exports = {
   development: {
-    username: 'bhanutej',
-    password: 'developer',
+    username: 'postgres',
+    password: 'Postgres1',
     database: 'webstore',
-    host: '127.0.0.1',
+    host: 'test-postgres.cvuutdcq2ujb.us-east-1.rds.amazonaws.com',
     dialect: 'postgres',
     use_env_variable: null,
   },
