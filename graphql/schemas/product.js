@@ -45,10 +45,11 @@ module.exports = gql`
         addProduct(input: ProductInput!): ProductResponse!
         updateProduct(input: UpdateProductInput!): ProductResponse!
         publish(input: PublishProductInput!): PublishProductResponse!
+        unPublish(input: PublishProductInput!): PublishProductResponse!
     }
 
     extend type Query {
-        products(limit: Int!): [Products!]!
+        products(limit: Int!, status: String!): [Products!]!
         product(productId: Int!): Product!
     }
 

@@ -5,7 +5,10 @@ const { Product, ProductKeyWord, Category, ProductFeature } = require('../../dat
 module.exports = {
   Query: {
     async products(root, args, context) {
-      const { limit } = args;
+      const { limit, status } = args;
+      if (status === 'published' || status === 'pending') {
+        return await Product.findAll({ where: { status }, limit });
+      }
       return await Product.findAll({ limit });
     },
 
@@ -47,6 +50,29 @@ module.exports = {
       await product.save();
       return {
         message: "Application published sucessfully!"
+      }
+    },
+    
+    async unPublish(root, args, { user = null }) {
+      if (!user) {
+        throw new AuthenticationError('Unauthorized access');
+      }
+      if ( user.role !== 'superadmin') {
+        throw new AuthenticationError('Unauthorized access');
+      }
+
+      const { productId } = args.input;
+      const product = await Product.findOne({ where: { id: productId } });
+
+      if(!product) {
+        throw new AuthenticationError('Product not found');
+      }
+
+      product.status = "pending";
+      product.publishedAt = null;
+      await product.save();
+      return {
+        message: "Application un-published sucessfully!"
       }
     },
 
