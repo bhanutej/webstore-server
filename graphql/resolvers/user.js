@@ -13,7 +13,12 @@ module.exports = {
         throw new AuthenticationError('Email already existed!');
       }
 
-      return User.create({ name, email, password, role });
+      const newUser = await User.create({ name, email, password, role });
+      if (newUser && bcrypt.compareSync(password, newUser.password)) {
+        const token = jwt.sign({ id: newUser.id }, process.env.TOKEN_SECRET);
+        return { ...newUser.toJSON(), token };
+      }
+      return user;
     },
 
     async login(root, { input }, context) {

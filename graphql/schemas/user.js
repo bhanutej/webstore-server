@@ -20,6 +20,7 @@ module.exports = gql`
         name: String!
         email: String!
         role: String!
+        token: String
     }
 
     input RegisterInput {
